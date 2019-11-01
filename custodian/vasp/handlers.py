@@ -1004,7 +1004,6 @@ class NonConvergingErrorHandler(ErrorHandler):
         """
         self.output_filename = output_filename
         self.nionic_steps = nionic_steps
-        self.logger = logging.getLogger(self.__class__.__name__)
 
     def check(self):
         vi = VaspInput.from_directory(".")
@@ -1057,17 +1056,13 @@ class NonConvergingErrorHandler(ErrorHandler):
         else:
             return {"errors": ["Non-converging job"], "actions": None}
         
-    
-    
     @classmethod
-    def from_dict(self,cls, d):
+    def from_dict(cls, d):
         """
         Custom from_dict method to preserve backwards compatibility with 
         older versions of Custodian.
         """
         if "change_algo" in d:
-            self.logger.warning("change_algo deprecated from NonConvergingErrorHandler, "  
-                                "this code will not work in future.")
             del d["change_algo"]
         return cls(output_filename=d.get("output_filename", "OSZICAR"),
                    nionic_steps=d.get("nionic_steps", 10))
