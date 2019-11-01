@@ -1060,7 +1060,7 @@ class NonConvergingErrorHandler(ErrorHandler):
     
     
     @classmethod
-    def from_dict(cls, d):
+    def from_dict(self,cls, d):
         """
         Custom from_dict method to preserve backwards compatibility with 
         older versions of Custodian.
